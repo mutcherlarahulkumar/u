@@ -26,8 +26,10 @@ const edSheeran = [
   { title: "Thandel with Ed Sheeran", img: "https://placehold.co/150" },
 ];
 
-const Card = ({ title, img }) => (
-    <div className="card">
+const Card = ({ title, img, setSong }) => (
+    <div className="card" onClick={() => {
+      setSong(title);
+    }}>
       <img src={img} alt={title} className="card-image" />
       <div className="hover-overlay">
         <div className="play-button">&gt;</div>
@@ -37,23 +39,23 @@ const Card = ({ title, img }) => (
   );
   
 
-const HorizontalScroll = ({ title, items }) => (
+const HorizontalScroll = ({ title, items, setSong }) => (
   <div className="section">
     <h2>{title}</h2>
     <div className="scroll-container">
       {items.map((item, index) => (
-        <Card key={index} {...item} />
+        <Card setSong={setSong} key={index} {...item} />
       ))}
     </div>
   </div>
 );
 
 
-export default function Music(){
+export default function Music({setSong}){
     return (
         <div>
             <div className="container">
-            <HorizontalScroll title="Spotlight: Ed Sheeran" items={edSheeran} />
+            <HorizontalScroll title="Spotlight: Ed Sheeran" items={edSheeran} setSong={setSong} />
             </div>  
         </div>
       );
